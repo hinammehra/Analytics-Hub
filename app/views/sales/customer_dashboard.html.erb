@@ -1,0 +1,42 @@
+<%= title "Sales for " + params[:staff_nickname] %>
+
+<h3>Sales for <%= params[:staff_nickname] %></h3>
+
+<div style="margin-top: 50px;">
+	<%= form_tag({:action => "customer_dashboard"}, {:method => "get"}) do %>
+	<%= render "partials/detailed_dashboard_date_filter" %>
+	    <%= hidden_field_tag :staff_id, params[:staff_id] %>
+   		<%= hidden_field_tag :staff_nickname, params[:staff_nickname] %>
+   		<%= hidden_field_tag :merged, params[:merged] %>
+		<div class="col-xs-4 col-xs-offset-8">
+			<%= submit_tag 'submit', class: 'btn btn-primary'%>
+		</div>
+	<% end %>
+</div>
+
+
+<br/><br/>
+<table class = "table table-striped table-bordered table-hover table-responsive">
+	<tr>
+		<th>Customer</th>
+		<th>Total</th>
+		<% @dates_paired.each do |date_key, date_pair| %>
+			<% date =  date_format_orders(date_pair[0]) + " - " + date_format_orders(date_pair[1].prev_day) %>
+			<th> <%= date %></th>
+		<% end %>
+	</tr>
+
+	<% @customers.each do |c| %>
+		<tr>
+			<td><%= link_to customer_name(c), controller: 'customer', action: 'summary', customer_id: c.id, customer_name: customer_name(c) %></td>
+			<% sums_dates_h = give_sum_date_h(c.id, @customer_sum_h) %>
+			<td class="num"><%= link_to sums_dates_h.values().sum, controller: 'order', action: 'all', end_date: @dates.max.to_s, start_date: @dates.min.to_s, search: '"'+customer_name(c)+'"' %></td>
+			<% @dates_paired.keys.each do |d| %>
+				<td class="num"><%= link_to exists_in_h(sums_dates_h, d), controller: 'order', action: 'all', end_date: @dates_paired[d].max.to_s, start_date: @dates_paired[d].min.to_s, search: '"'+customer_name(c)+'"' %></td>
+			<% end %>
+		</tr>
+
+	<% end %>
+
+
+</table>

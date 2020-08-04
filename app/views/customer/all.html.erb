@@ -1,0 +1,25 @@
+<%= title "Customers" %>
+<h3>Customers</h3>
+
+<center><%= link_to "View Incomplete Customers", action: 'incomplete_customers' %></center>
+<center><%= link_to "View My Customers", action: 'all', staff: {id: session[:user_id]} unless current_user_sales?(session[:authority]) %></center>
+
+<%= form_tag({:controller => "customer", :action => customer_filter_path}, {:method => "get"}) do %>
+
+<div class="form-group" style="margin-left:300px;margin-top:50px;">
+	<%= render "partials/customer_filter" %>
+	<%= submit_tag "Filter", class: 'btn btn-primary' %>
+</div>
+<% end %>
+
+<%= render "partials/customer", customers: @customers %>
+
+<% unless @leads.nil? || @leads.blank? %>
+	<h3>Lead</h3>
+	<%= render "lead_partials/leads", leads: @leads  %>
+<% end %>
+
+<% unless @zomato.nil? || @zomato.blank? %>
+	<h3>Zomato</h3>
+	<%= render 'customer_partials/zomato_list', zomatos: @zomato%>
+<% end %>

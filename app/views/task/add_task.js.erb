@@ -1,0 +1,19 @@
+$('.subject_selection').empty();
+$('.subject_selection').append( $('<option value="">Select the Subject</option>'));
+<% @subjects.each do |subject| %>
+  $('.subject_selection').append($('<option value="<%= subject.id %>"><%=subject.subject%></option>'));
+<% end %>
+
+$('.customer_selection').empty();
+$('.customer_selection').append( $('<option value="">Assign to Customer</option>'));
+$('.customer_selection').append( $('<option value="">Do not assign to customers</option>'));
+<% @customers.each do |customer| %>
+  $('.customer_selection').append($('<option value="<%= customer.id %>"><%=customer.actual_name%></option>'));
+<% end %>
+
+$('.lead_selection').empty();
+$('.lead_selection').append( $('<option value="">Assign to Leads</option>'));
+$('.lead_selection').append( $('<option value="">Do not assign to leads</option>'));
+<% @leads.each do |lead| %>
+  $('.lead_selection').append($('<option value="<%= lead.id %>"><%=lead.actual_name%></option>'));
+<% end %>

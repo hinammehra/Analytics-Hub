@@ -1,0 +1,49 @@
+<%= form_for(@order_type) do |f| %>
+  <% if @order_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order_type.errors.count, "error") %> prohibited this order_type from being saved:</h2>
+
+      <ul>
+      <% @order_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <span id="name_error" class="invalid_input"></span>
+  </div>
+  
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <span id="description_error" class="invalid_input"></span>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_price_factor %>
+    <%= f.text_field :item_price_factor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_wet %>
+    <%= f.text_field :item_wet %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_gst %>
+    <%= f.text_field :item_gst %>
+  </div>
+
+  <div class="field">
+    <%= f.label :based_price_deduction %>
+    <%= f.text_field :based_price_deduction %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

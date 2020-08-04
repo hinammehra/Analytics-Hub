@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=ISO-8859-1' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div>
+      <p>Hi,</p>
+      <p>Thank you for your recent order for <%= @customer.actual_name%>.</p>
+      <p>Please find the attached a copy of the invoice for Invoice <%= @order.id%>. The total of the invoice is $<%= @order.total_inc_tax.round(2)%>.</p>
+      <p>Should you have any questions please be in contact with your sales executive or our office team.</p>
+    </div>
+
+    <b>Untapped Fine Wines</b><br/>
+      <table>
+        <tr>
+          <td>03 9676 9663</td>
+        </tr>
+        <tr>
+          <td>customerservice@untappedwines.com</td>
+        </tr>
+      </table>
+
+    <% if @staff.id==45 %>
+    <%= render 'reminder_mailer_partials/signature_general'%>
+    <% else %>
+    <%= render 'reminder_mailer_partials/signature_sales', staff: Staff.find(26) %>
+    <% end %>
+  </body>
+</html>

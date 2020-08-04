@@ -1,0 +1,112 @@
+// Place all the styles related to the sales controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.num {
+    text-align: right
+}
+
+.text {
+    text-align: left
+}
+
+a:link, a:visited {
+    color: inherit;
+}
+
+a:hover {
+    color: blue;
+}
+
+.blank-row
+{
+    height: 30px;
+    background-color: white;
+}
+
+.button {
+    border: none;
+    color: white !important;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: black;
+    margin-top: 50px;
+}
+
+.not-default{
+    display: none;
+}
+
+.default {
+    display: block;
+}
+
+table.default {
+    display:table
+}
+
+button.not-default {
+    background-color: #e7e7e7; /* Gray */
+    color: black !important;
+}
+
+button.default {
+    background-color: #4CAF50;
+}
+
+h3, h4 {
+    text-align: center;
+}
+
+.dropdown-toggle {
+    background-color: black;
+}
+
+.italics {
+    font-style: italic;
+}
+
+.inline {
+    display: inline-block;
+}
+
+table {
+    margin-top: 50px;
+}
+
+.none {
+    display: none;
+}
+
+.paid {
+    color: green;
+}
+
+.unpaid {
+    color: red;
+}
+
+.over {
+    color: red;
+}
+
+.over-15 {
+    color: red;
+}
+
+.over-30 {
+    color: red;
+}
+
+.over-60 {
+    color: red;
+}
+
+.partially-paid {
+    color: orange;
+}

@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Order Type</h3>
+
+<p>
+  <strong>Name:</strong>
+  <%= @order_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @order_type.description %>
+</p>
+
+<p>
+    <strong>Item Price factor</strong>
+    <%= @order_type.item_price_factor %>
+</p>
+
+<p>
+    <strong>Item WET</strong>
+    <%= @order_type.item_wet %>
+</p>
+
+<p>
+    <strong>Item GST</strong>
+    <%= @order_type.item_gst %>
+</p>
+
+<p>
+    <strong>Item based-price deduction</strong>
+    <%= @order_type.based_price_deduction %>
+</p>
+
+<%= link_to 'Edit', edit_order_type_path(@order_type) %> |
+<%= link_to 'Back', order_types_path %>

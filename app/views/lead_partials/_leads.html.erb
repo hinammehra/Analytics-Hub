@@ -1,0 +1,24 @@
+
+
+<table class = "table table-striped table-bordered table-hover table-responsive">
+	<tr>
+		<th>Sales Rep <%= render "partials/sort_arrows", order: 'order_by_staff' %></th>
+		<th>Name <%= render "partials/sort_arrows", order: 'order_by_name' %></th>
+		<th>Type</th>
+		<th>Channel <%= render "partials/sort_arrows", order: 'order_by_style' %></th>
+		<th>Date Created <%= render "partials/sort_arrows", order: 'order_by_date' %></th>
+		<th>Address</th>
+	</tr>
+
+	<% leads.each do |l| %>
+	<tr>
+		<%= render 'lead_partials/lead_staff_update', lead_id: l.id, staff_id: l.staff_id, can_update_staff: allow_to_update(session[:user_id])%>
+		<td><%= link_to l.actual_name, controller: 'lead', action: 'summary', lead_id: l.id%></td>
+		<td><%= lead_type_name(l) %></td>
+		<td><%= customer_style_name(l) %></td>
+		<td><%= short_date(l.created_at) %></td>
+		<td><%= lead_address(l)%></td>
+	</tr>
+	<% end %>
+
+</table>

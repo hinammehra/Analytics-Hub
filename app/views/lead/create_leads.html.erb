@@ -1,0 +1,139 @@
+<%= title "Create Lead"%>
+<h3>Create Lead</h3>
+<br/>
+
+<% @staff = Staff.find(session[:user_id]) if @staff.nil? %>
+
+<script type="text/javascript">
+  var validateAddressSearch = function() {
+    let search = document.getElementById("search");
+    if (search.value.length < 5) {
+      alert("Please fill in an appropriate address to begin your search");
+      search.style["border-color"] = "red";
+      return false;
+    }
+  }  
+
+  var validateForm = function() {
+    let message = "";
+    let isValid = true;
+
+    let street = document.getElementById("customer_lead_address");
+    let name = document.getElementById("customer_lead_actual_name");
+    let mobile = document.getElementById("customer_lead_mobile_phone");
+
+    if (street.value.length < 12) {
+        message += "+ Please fill in an appropriate address by using the Google Address textbox.\n";
+        street.style["border-color"] = "red";
+        isValid = false;
+    }
+    
+    if (name.value.length < 3) {
+      message += "+ Please customer nickname or company name with a minimum of 3 characters.\n";
+      name.style["border-color"] = "red";
+      isValid = false;
+    }
+
+    if (mobile.value.length < 9) {
+      message += "+ Please provide a correct mobile phone number.\n";
+      mobile.style["border-color"] = "red";
+      isValid = false;
+    }
+
+    if (!isValid) {
+      alert(message);
+      return isValid;
+    }
+  }
+
+</script>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <%#= form_tag({:controller => "lead", :action => "create_leads"}, {:method => "get", onsubmit: "validateAddress()"}) do %>
+    <%= form_tag({:controller => "lead", :action => "create_leads"}, {:method => "get", onsubmit: "return validateAddressSearch()"}) do %>
+    <%= text_field_tag('search', @search_text, placeholder: 'Google Address', class: 'form-control') %>
+    <%= hidden_field_tag :staff_id, @staff.id %>
+    <%= submit_tag "Search!", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row place_lists">
+  <% unless @google_spots.nil?%>
+    <% @google_spots.each do |spot|%>
+    <div class="col-xs-2">
+      <%= link_to spot.name, fetch_lead_path(place_id: spot.place_id, staff_id: @staff.id), remote: true %>
+      <br/>
+      <%= spot.formatted_address %>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+
+<br/><br/>
+  <div class="row">
+    <div class="col-md-8 lead_form">
+      <% customer_lead, spot = spot_details(@google_spots.first.place_id, @staff.id ) unless @google_spots.blank? %>
+      <%= render 'lead_partials/lead_creation_form', customer_lead: customer_lead, spot: spot%>
+    </div>
+
+    <div class="col-md-4 customer_leads_field">
+      <%= render 'partials/google_img_map', spot: spot, size: 400%>
+    </div>
+
+  </div>
+
+<p style="padding-left: 50px;"><%= link_to "Go Back to Customer Profile", action: 'summary', customer_id: @customer_id, customer_name: @customer_name %></p>
+
+<!-- On-Off button for customer/region -->
+<script>
+
+var lead_form = $('div.lead_form');
+var lead_pictures = $('.lead_pictures');
+
+if ($('#selector button.active').val() == "customer") {
+  $(".customer_leads_field").show();
+  $(".region_leads_field").hide();
+} else {
+  $(".region_leads_field").show();
+  $(".customer_leads_field").hide();
+};
+
+$('#selector button').click(function () {
+  $(this).addClass('active').siblings().removeClass('active');
+
+  if ($(this).val() == "customer") {
+    $(".customer_leads_field").show();
+    $(".region_leads_field").hide();
+  } else {
+    $(".region_leads_field").show();
+    $(".customer_leads_field").hide();
+  };
+});
+</script>
+<script type="text/javascript">
+  var handler = Gmaps.build('Google');
+  handler.buildMap({
+      internal: {
+          id: 'map'
+      }
+  }, function () {
+    <% unless spot.nil?%>
+      markers = handler.addMarkers([
+        {
+          "lat": '<%= spot.lat %>',
+          "lng": '<%= spot.lng %>',
+          "picture": {
+            "url": '<%= spot.icon%>',
+            "width":  50,
+            "height": 50
+          }
+        }
+      ]);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(15);
+    <% end %>
+  });
+</script>
