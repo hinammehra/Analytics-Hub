@@ -1,17 +1,9 @@
 GIT
-  remote: git://github.com/berikin/rails-rateit.git
+  remote: https://github.com/berikin/rails-rateit.git
   revision: 35004859279195c619e1075d2616c226c3d447aa
   specs:
     rails-rateit (1.0.22)
       railties (>= 3.2, < 5.0)
-
-GIT
-  remote: git://github.com/sponee/carrierwave-dropbox.git
-  revision: 12def609b719fbfd8c382d9388fec9fc5b9fc82d
-  specs:
-    carrierwave-dropbox (2.1.0)
-      carrierwave (~> 0.10)
-      dropbox-sdk-v2 (~> 0.0.3)
 
 GIT
   remote: https://github.com/hinammehra/xeroizer.git
@@ -24,6 +16,14 @@ GIT
       nokogiri
       oauth (>= 0.4.5)
       tzinfo
+
+GIT
+  remote: https://github.com/sponee/carrierwave-dropbox.git
+  revision: 12def609b719fbfd8c382d9388fec9fc5b9fc82d
+  specs:
+    carrierwave-dropbox (2.1.0)
+      carrierwave (~> 0.10)
+      dropbox-sdk-v2 (~> 0.0.3)
 
 GEM
   remote: https://rubygems.org/
@@ -123,7 +123,7 @@ GEM
     debug_inspector (0.0.2)
     declarative (0.0.9)
     declarative-option (0.1.0)
-    domain_name (0.5.20170404)
+    domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dropbox-sdk-v2 (0.0.3)
       http (~> 2.0)
@@ -170,7 +170,7 @@ GEM
       http-cookie (~> 1.0)
       http-form_data (~> 1.0.1)
       http_parser.rb (~> 0.6.0)
-    http-cookie (1.0.3)
+    http-cookie (1.0.4)
       domain_name (~> 0.5)
     http-form_data (1.0.3)
     http_parser.rb (0.6.0)
@@ -204,7 +204,9 @@ GEM
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
-    mimemagic (0.3.2)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
     mini_magick (4.6.1)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
@@ -216,6 +218,7 @@ GEM
     multipart-post (2.0.0)
     mysql2 (0.4.10)
     mysql2 (0.4.10-x86-mingw32)
+    nio4r (2.5.8)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     nokogiri (1.8.5-x86-mingw32)
@@ -223,7 +226,8 @@ GEM
     oauth (0.5.1)
     os (0.9.6)
     public_suffix (2.0.5)
-    puma (3.6.2)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     rack (1.6.10)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -314,8 +318,8 @@ GEM
     underscore-rails (1.8.3)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.4)
-    unf_ext (0.0.7.4-x86-mingw32)
+    unf_ext (0.0.8.1)
+    unf_ext (0.0.8.1-x86-mingw32)
     uuidtools (2.1.5)
     web-console (2.3.0)
       activemodel (>= 4.0)
